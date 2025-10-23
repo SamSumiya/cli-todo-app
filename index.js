@@ -6,6 +6,7 @@ const rl = readline.createInterface({
     output: process.stdout
 })
 
+
 rl.on('line', (input) => {
     if (input === 'exit') {
         rl.close()
