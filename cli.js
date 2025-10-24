@@ -1,3 +1,4 @@
+import { addTodo, changeTodo, listAllTodos, deleteTodo, clearAllTodos} from './actions.js';
 
 export const cliCommands = [
     {
