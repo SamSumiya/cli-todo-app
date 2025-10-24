@@ -1,0 +1,5 @@
+
+
+export function validateInput(input) {
+
+}

@@ -10,9 +10,9 @@ const rl = readline.createInterface({
 
 
 // Starting the program
-const msg = await initiateFile()
-console.log(msg)
-rl.setPrompt('>> ')
+await initiateFile()
+
+rl.setPrompt('todo-> ')
 rl.prompt()
 
 rl.on('line', async (input) => {
@@ -27,10 +27,12 @@ rl.on('line', async (input) => {
 
     if (action.name === 'exit') {
         rl.close()
+        return 
     }
     
     const userInput = args.join(' ')
-    console.log('DEBUG typeof handler:', typeof action.handler)
-    console.log('DEBUG handler value:', action.handler)
+    rl.setPrompt('>> ')
+    rl.prompt()
+
     action.handler(userInput)
 })

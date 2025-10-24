@@ -1,8 +1,12 @@
-console.log('loaded actions.js from', import.meta.url) 
+import { writeFile } from "node:fs/promises"
+
+import { writeTodo } from "./crud.js"
+
 
 export function addTodo(input) {
-        
-}
+    writeTodo(input)
+    return input
+}   
 
 export function changeTodo(input) {
     console.log('change', input)
