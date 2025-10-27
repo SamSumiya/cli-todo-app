@@ -1,17 +1,9 @@
 import { writeTodo } from "./crud.js"
 import { randomUUID } from 'crypto'
-
-
+import { formatInput } from './utils.js'
 
 export async function addTodo(input) {
-    const formatted = {
-        id: randomUUID(), 
-        category: 'General', 
-        detail: input, 
-        completed: false, 
-        createAt: new Date().toISOString(), 
-        updatedAt: new Date().toISOString(),
-    }
+    const formatted = formatInput(input)
     await writeTodo(formatted)
     console.log(`Added new todo ${input} successfully`)
 }   
