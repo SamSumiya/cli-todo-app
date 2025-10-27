@@ -3,9 +3,13 @@ import { randomUUID } from 'crypto'
 import { formatInput } from './utils.js'
 
 export async function addTodo(input) {
-    const formatted = formatInput(input)
-    await writeTodo(formatted)
-    console.log(`Added new todo ${input} successfully`)
+    try {
+        const formatted = formatInput(input) 
+        await writeTodo(formatted)
+        `✅ Added new todo: "${formatted.text}" [${formatted.category}]`
+    } catch(err) {
+        console.log(`⚠️ ${err.message}`)
+    }
 }   
 
 export function changeTodo(input) {

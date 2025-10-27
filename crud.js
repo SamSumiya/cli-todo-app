@@ -23,7 +23,7 @@ export async function initiateFile() {
 }
 
 export async function writeTodo(input) {
-
+    
     let rawData; 
     try {
         rawData = await readFile(dataFile, 'utf8')
