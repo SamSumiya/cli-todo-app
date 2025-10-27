@@ -1,4 +1,4 @@
-import { writeTodo, readTodos } from "./crud.js"
+import { writeTodo, readTodos, writeAllTodos } from "./crud.js"
 import { formatInput, formatTodos } from './utils.js'
 
 export async function addTodo(input) {
@@ -10,6 +10,14 @@ export async function addTodo(input) {
         console.log(`⚠️ ${err.message} ??`)
     }
 }   
+
+export async function addAllTodos(input) {
+    try {
+        await writeAllTodos(input)
+    } catch(err) {
+        console.log(err?.message)
+    }
+}
 
 export async function changeTodo(input) {
 }
@@ -27,8 +35,11 @@ export async function listAllTodos() {
     }
 }
 
-export function deleteTodo(input) {
-    console.log('delete one', input)
+export async function deleteTodo(input) {
+    try {
+        const todos = await readTodos() 
+        console.log(todos)
+    }
 }
 
 export function clearAllTodos() {

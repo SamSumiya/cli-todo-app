@@ -25,6 +25,14 @@ export async function initiateFile() {
     }
 }
 
+export async function writeAllTodos(todos) {
+    try {
+        await writeFile(DATA_PATH, JSON.stringify(todos, null, 2))
+    } catch(err) {
+       console.log(err)
+    }
+}
+
 export async function writeTodo(input) {
     
     let rawData; 
