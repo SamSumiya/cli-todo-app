@@ -1,23 +1,30 @@
-import { writeTodo } from "./crud.js"
-import { randomUUID } from 'crypto'
-import { formatInput } from './utils.js'
+import { writeTodo, readTodos } from "./crud.js"
+import { formatInput, formatTodos } from './utils.js'
 
 export async function addTodo(input) {
     try {
         const formatted = formatInput(input) 
         await writeTodo(formatted)
-        `✅ Added new todo: "${formatted.text}" [${formatted.category}]`
+        console.log(`✅ Added new todo: "${formatted.detail}" in [${formatted.category}] category!`) 
     } catch(err) {
-        console.log(`⚠️ ${err.message}`)
+        console.log(`⚠️ ${err.message} ??`)
     }
 }   
 
-export function changeTodo(input) {
-    console.log('change', input)
+export async function changeTodo(input) {
 }
 
-export function listAllTodos() {
-    console.log('list all')
+export async function listAllTodos() {
+    const todos = await readTodos()
+    try {   
+        if (!todos || todos.length === 0) {
+            console.log("No todos found.")
+            return 
+        } 
+        console.log(formatTodos(todos))
+    } catch(err) {
+        console.log("Error listing todos: ", err.message)
+    }
 }
 
 export function deleteTodo(input) {

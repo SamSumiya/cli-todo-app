@@ -33,6 +33,6 @@ rl.on('line', async (input) => {
     const userInput = args.join(' ')
     rl.setPrompt('>> ')
     rl.prompt()
-
+    console.log(userInput, 'userInput')
     action.handler(userInput)
 })

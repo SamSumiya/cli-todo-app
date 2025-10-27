@@ -2,7 +2,10 @@ import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join, basename } from "node:path";
 import { fileURLToPath } from "node:url";
 
- 
+
+import { DATA_PATH } from "./config/constants.js"; 
+import { formatTodos } from "./utils.js";
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
@@ -51,5 +54,24 @@ export async function writeTodo(input) {
         await writeFile(dataFile, JSON.stringify(todos, null, 2), 'utf8')
     } catch(err) {
         console.error(err)
+    }
+}
+
+export async function readTodos() {
+    try {
+        const rawFile = await readFile(DATA_PATH, 'utf8')
+        const todos = JSON.parse(rawFile)
+        return todos 
+    } catch(err) {
+        console.log(err?.message)
+        if (err.code === 'ENOENT') {
+            console.log('Creating file...')
+            await initiateFile()
+            return [] 
+        } else if (err.code === 'EACCES' || err.code === 'EPERM') {
+            console.log('ACCESS DENIED: forbidden access to ', DATA_PATH)
+            return [] 
+        }
+        throw err
     }
 }
