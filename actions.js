@@ -1,11 +1,19 @@
-import { writeFile } from "node:fs/promises"
-
 import { writeTodo } from "./crud.js"
+import { randomUUID } from 'crypto'
 
 
-export function addTodo(input) {
-    writeTodo(input)
-    return input
+
+export async function addTodo(input) {
+    const formatted = {
+        id: randomUUID(), 
+        category: 'General', 
+        detail: input, 
+        completed: false, 
+        createAt: new Date().toISOString(), 
+        updatedAt: new Date().toISOString(),
+    }
+    await writeTodo(formatted)
+    console.log(`Added new todo ${input} successfully`)
 }   
 
 export function changeTodo(input) {

@@ -48,7 +48,7 @@ export async function writeTodo(input) {
     todos.push(input) 
     
     try {   
-        await writeFile(dataFile, JSON.stringify(todos), 'utf8')
+        await writeFile(dataFile, JSON.stringify(todos, null, 2), 'utf8')
     } catch(err) {
         console.error(err)
     }

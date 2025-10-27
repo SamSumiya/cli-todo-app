@@ -1,1 +1,23 @@
-["first write","second write","third write","forth write","new todo"]
+[
+  "first write",
+  "second write",
+  "third write",
+  "forth write",
+  "new todo",
+  {
+    "id": "01a5f70b-0759-4d91-a4e9-b370bcaa2e90",
+    "category": "General",
+    "detail": "test 123",
+    "completed": false,
+    "createAt": "2025-10-27T17:41:33.959Z",
+    "updatedAt": "2025-10-27T17:41:33.961Z"
+  },
+  {
+    "id": "0b5b6c12-fe49-4c08-b83f-47b1efe0fae5",
+    "category": "General",
+    "detail": "test 2 xxx",
+    "completed": false,
+    "createAt": "2025-10-27T17:43:07.008Z",
+    "updatedAt": "2025-10-27T17:43:07.010Z"
+  }
+]
