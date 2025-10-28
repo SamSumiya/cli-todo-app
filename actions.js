@@ -95,23 +95,18 @@ export async function deleteTodo() {
         }
 }
 
-export async function clearAllTodos() {
-    const rl = readline.createInterface({
-        input: process.stdin, 
-        output: process.stdout 
-    })
+export async function clearAllTodos(_, rl) {
 
     const question = (query) => new Promise(resolve => rl.question(query, resolve))
 
+    let answer = await question('Are you sure you want to delete all todos (y/N): ')
 
-    
-
-    try {
+    if (answer.trim().toLowerCase() === 'y') {
         await writeAllTodos([])
         console.log(`💥 Delete all todos.`)
-    } catch(err) {
-        console.log(err?.message)
-    }
+    } else {
+        console.log('❎ Cancelled.')
+    } 
 }
 
 

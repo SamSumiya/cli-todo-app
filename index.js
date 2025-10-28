@@ -35,10 +35,11 @@ rl.on('line', async (input) => {
     }
     
     const userInput = args.join(' ')
+    
     try {
         rl.pause()
 
-        await action.handler(userInput)
+        await action.handler(userInput, rl)
     } catch(err) {
         console.log('Error:', err?.message || err);
     } finally {
