@@ -1,3 +1,4 @@
+import readline from 'node:readline'; 
 import { writeTodo, readTodos, writeAllTodos } from "./crud.js"
 import { formatInput, formatTodos } from './utils.js'
 import inquirer from "inquirer"
@@ -87,15 +88,30 @@ export async function deleteTodo() {
 
         const [removed] = todos.splice(idx, 1)
         await writeAllTodos(todos)
-        
+
         console.log(`🗑️ Deleted "${removed.todo ?? removed.detail ?? '(No Text)'}" successfully.`)
         } catch (err) {
             console.log('Error deleting todo: ', err.message)
         }
 }
 
-export function clearAllTodos() {
-    console.log('clear all') 
+export async function clearAllTodos() {
+    const rl = readline.createInterface({
+        input: process.stdin, 
+        output: process.stdout 
+    })
+
+    const question = (query) => new Promise(resolve => rl.question(query, resolve))
+
+
+    
+
+    try {
+        await writeAllTodos([])
+        console.log(`💥 Delete all todos.`)
+    } catch(err) {
+        console.log(err?.message)
+    }
 }
 
 

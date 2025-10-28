@@ -2,13 +2,10 @@ import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join, basename } from "node:path";
 import { fileURLToPath } from "node:url";
 
-
 import { DATA_PATH } from "./config/constants.js"; 
-import { formatTodos } from "./utils.js";
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
-
 
 const dataFolder = join(__dirname, 'data')
 const dataFile = join(dataFolder, 'data.json')
@@ -25,6 +22,7 @@ export async function initiateFile() {
     }
 }
 
+
 export async function writeAllTodos(todos) {
     try {
         await writeFile(DATA_PATH, JSON.stringify(todos, null, 2), 'utf-8')
@@ -33,8 +31,8 @@ export async function writeAllTodos(todos) {
     }
 }
 
+
 export async function writeTodo(input) {
-    
     let rawData; 
     try {
         rawData = await readFile(dataFile, 'utf8')
@@ -64,6 +62,7 @@ export async function writeTodo(input) {
         console.error(err)
     }
 }
+
 
 export async function readTodos() {
     try {
