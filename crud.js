@@ -27,7 +27,7 @@ export async function initiateFile() {
 
 export async function writeAllTodos(todos) {
     try {
-        await writeFile(DATA_PATH, JSON.stringify(todos, null, 2))
+        await writeFile(DATA_PATH, JSON.stringify(todos, null, 2), 'utf-8')
     } catch(err) {
        console.log(err)
     }

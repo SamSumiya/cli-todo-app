@@ -8,12 +8,15 @@ const rl = readline.createInterface({
     output: process.stdout
 })
 
-
 // Starting the program
 await initiateFile()
 
-rl.setPrompt('todo-> ')
-rl.prompt()
+function showPrompt(label = 'todo:> ') {
+    rl.setPrompt(label)
+    rl.prompt()
+}
+
+showPrompt()
 
 rl.on('line', async (input) => {
     const [command, ...args] = input.trim().split(/\s+/)
@@ -21,7 +24,8 @@ rl.on('line', async (input) => {
     const action = cliCommands.find( c => c.name === command)
 
     if (!action) {
-        console.log(`Cannot find command: ${command}`)
+        console.log(`Cannot find command: ${command}, try again please.`)
+        showPrompt()
         return 
     }
 
@@ -31,8 +35,14 @@ rl.on('line', async (input) => {
     }
     
     const userInput = args.join(' ')
-    rl.setPrompt('>> ')
-    rl.prompt()
-    console.log(userInput, 'userInput')
-    action.handler(userInput)
+    try {
+        rl.pause()
+
+        await action.handler(userInput)
+    } catch(err) {
+        console.log('Error:', err?.message || err);
+    } finally {
+       rl.resume()
+       showPrompt();
+    }
 })
